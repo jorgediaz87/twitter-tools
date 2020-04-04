@@ -1,19 +1,19 @@
 <template>
-    <button @click="blockInterval" type="button" class="btn btn-danger btn-lg btn-block">
+    <button @click="block()" type="button" class="btn btn-danger btn-lg btn-block">
         Block all listed accounts
     </button>
 </template>
 
 <script>
 import axios from 'axios';
+const delay = (milisecs) => {
+    return new Promise((resolve) => {
+        setTimeout(resolve, milisecs);
+    });
+};
 
 export default {
     name: 'blockAll',
-    data() {
-        return {
-            lastIteration: Boolean,
-        };
-    },
     props: {
         profiles: {
             type: Array,
@@ -21,11 +21,8 @@ export default {
         },
     },
     methods: {
-        blockAll() {
-            this.profiles.forEach((profile, index) => {
-                if (index === this.profiles.length - 1) {
-                    this.lastIteration = true;
-                }
+        async block() {
+            for (const profile of this.profiles) {
                 axios
                     .post(`http://localhost:5000/api/1.0/profiles/block/${profile.id}`)
                     .then((res) => {
@@ -34,17 +31,7 @@ export default {
                     .catch((error) => {
                         console.error(error);
                     });
-            });
-        },
-        // TODO: FIX THIS
-        blockInterval() {
-            console.log(this.lastIteration);
-            if (!this.lastIteration) {
-                setInterval(() => {
-                    this.blockAll();
-                }, 5000);
-            } else {
-                clearInterval(this.blockAll());
+                await delay(5000);
             }
         },
     },
