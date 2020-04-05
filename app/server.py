@@ -1,9 +1,9 @@
 import os
 
+import tweepy
 from dotenv import load_dotenv
 from flask import Flask, jsonify
 from flask_cors import CORS
-import tweepy
 
 auth = tweepy.OAuthHandler(os.getenv("API_KEY"), os.getenv("API_SECRET"))
 auth.set_access_token(os.getenv("TOKEN"), os.getenv("TOKEN_SECRET"))
@@ -11,7 +11,7 @@ auth.set_access_token(os.getenv("TOKEN"), os.getenv("TOKEN_SECRET"))
 API = tweepy.API(auth, parser=tweepy.parsers.JSONParser())
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(app)
 
 
 @app.route('/api/1.0/profiles/<string:query>', methods=['GET'])

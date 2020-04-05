@@ -42,10 +42,6 @@ export default {
                 type: Number,
                 default: null,
             },
-            profileName: {
-                type: String,
-                default: null,
-            },
         };
     },
     props: {
@@ -57,13 +53,13 @@ export default {
     updated() {
         let maxHeight = 0;
         let bios = document.getElementsByTagName('small');
-        bios.forEach(bio => {
+        bios.forEach((bio) => {
             if (bio.offsetWidth > maxHeight) {
                 maxHeight = bio.offsetHeight;
             }
         });
 
-        bios.forEach(bio => {
+        bios.forEach((bio) => {
             bio.style.height = maxHeight;
         });
     },

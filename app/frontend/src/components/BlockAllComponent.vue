@@ -31,7 +31,7 @@ export default {
                     .catch((error) => {
                         console.error(error);
                     });
-                await delay(5000);
+                await delay(Math.floor(5000 + Math.random() * (8000 + 1 - 5000)));
             }
         },
     },

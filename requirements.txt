@@ -1,0 +1,5 @@
+###### Requirements without Version Specifiers ######
+Flask
+flask-cors
+python-dotenv
+tweepy
