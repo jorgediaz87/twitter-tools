@@ -3,10 +3,10 @@
         <b-container>
             <blockAll :profiles="this.profiles"></blockAll>
         </b-container>
-        <div class="card-group" v-for="rowIdx in Math.ceil(profiles.length / 3)" :key="rowIdx">
-            <div
+        <b-card-group v-for="rowIdx in Math.ceil(profiles.length / 5)" :key="rowIdx">
+            <b-card
                 class="card card-profile text-center"
-                v-for="profile in profiles.slice(3 * (rowIdx - 1), 3 * rowIdx)"
+                v-for="profile in profiles.slice(5 * (rowIdx - 1), 5 * rowIdx)"
                 :key="profile.id"
             >
                 <img class="card-img-top" :src="profile.profile_background_image_url" />
@@ -15,14 +15,11 @@
                     <h4 class="card-title">{{ profile.name }}</h4>
                     <small>{{ profile.description }}</small>
                     <div class="card-body">
-                        <block-button
-                            :profileName="profile.name"
-                            :profileId="profile.id"
-                        ></block-button>
+                        <block-button :profileId="profile.id"></block-button>
                     </div>
                 </div>
-            </div>
-        </div>
+            </b-card>
+        </b-card-group>
     </div>
 </template>
 
@@ -90,6 +87,25 @@ body {
     border-radius: 0;
     border: 0;
     box-shadow: 1em 1em 2em rgba(0, 0, 0, 0.2);
+    animation-name: fade-in;
+    animation-fill-mode: both;
+    animation-duration: 0.5s;
+
+    $animationDelay: 1;
+    @for $i from 1 through 20 {
+        .projects div:nth-of-type(#{$i}) {
+            animation-delay: #{0.3+ ($i)/30}s;
+        }
+    }
+
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
 
     .card-img-top {
         border-radius: 0;
@@ -111,45 +127,6 @@ body {
             display: block;
             font-size: 0.6em;
             margin-top: 0.2em;
-        }
-    }
-
-    .card-links {
-        margin-bottom: 25px;
-
-        .fa {
-            margin: 0 1em;
-            font-size: 1.6em;
-
-            &:focus,
-            &:hover {
-                text-decoration: none;
-            }
-
-            &.fa-dribbble {
-                color: $dribbble-color;
-                font-weight: bold;
-
-                &:hover {
-                    color: darken($dribbble-color, 10%);
-                }
-            }
-
-            &.fa-twitter {
-                color: $twitter-color;
-
-                &:hover {
-                    color: darken($twitter-color, 10%);
-                }
-            }
-
-            &.fa-facebook {
-                color: $facebook-color;
-
-                &:hover {
-                    color: darken($facebook-color, 10%);
-                }
-            }
         }
     }
 }

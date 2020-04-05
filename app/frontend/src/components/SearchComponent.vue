@@ -1,53 +1,39 @@
 <template>
     <b-container id="search-wrapper">
         <b-row>
-            <div class="col-sm-10 offset-sm-1 text-center">
-                <div class="input-group mb-3">
-                    <input
-                        v-model="query"
-                        type="text"
-                        class="form-control"
-                        placeholder="Introduce Twitter Username/Bio"
-                        aria-label="Introduce Twitter Username/Bio"
-                        aria-describedby="button-addon2"
-                    />
-                    <div class="input-group-append">
-                        <button
-                            @click="getProfiles"
-                            class="btn btn-outline-primary"
-                            type="button"
-                            id="button-addon2"
-                        >
-                            Search!
-                        </button>
-                    </div>
+            <div class="input-group mb-3">
+                <b-form-input
+                    v-model="query"
+                    type="text"
+                    class="form-control"
+                    placeholder="Introduce Twitter Username/Bio"
+                    aria-label="Introduce Twitter Username/Bio"
+                    aria-describedby="button-addon2"
+                />
+                <div class="input-group-append">
+                    <button
+                        @click="getProfiles"
+                        class="btn btn-outline-primary"
+                        type="button"
+                        id="button-addon2"
+                    >
+                        Search!
+                    </button>
                 </div>
             </div>
         </b-row>
-        <b-row class="justify-content-md-center">
-            <b-col cols="10">
-                <b-button size="sm" block v-b-toggle.search-options variant="outline-primary"
-                    >Options</b-button
-                >
-                <b-collapse id="search-options" class="mt-2"> </b-collapse
-            ></b-col>
-        </b-row>
         <card :profiles="this.profiles"></card>
-        <b-row v-if="this.profiles !== null" class="justify-content-md-center">
-            <b-col cols="12">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li v-for="index in this.currentPage" :key="index" class="page-item">
-                            <button type="button" @click="getProfiles(index)" class="page-link">
-                                {{ index }}
-                            </button>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-                </nav>
-            </b-col>
-        </b-row>
+        <div class="overflow-auto" v-if="this.profiles !== null">
+            <div class="mt-3">
+                <b-pagination
+                    @input="getProfiles(currentPage)"
+                    v-model="currentPage"
+                    :total-rows="rows"
+                    :per-page="perPage"
+                    align="fill"
+                ></b-pagination>
+            </div>
+        </div>
     </b-container>
 </template>
 
@@ -62,8 +48,9 @@ export default {
     data() {
         return {
             query: null,
+            rows: 900,
             perPage: 20,
-            currentPage: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            currentPage: 1,
             profiles: null,
         };
     },
