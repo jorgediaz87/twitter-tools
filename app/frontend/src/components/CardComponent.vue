@@ -1,8 +1,8 @@
 <template>
     <div v-if="profiles !== null">
-        <div class="container">
+        <b-container>
             <blockAll :profiles="this.profiles"></blockAll>
-        </div>
+        </b-container>
         <div class="card-group" v-for="rowIdx in Math.ceil(profiles.length / 3)" :key="rowIdx">
             <div
                 class="card card-profile text-center"

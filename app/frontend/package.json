@@ -1,5 +1,5 @@
 {
-    "name": "twitter-blocker",
+    "name": "twitter-tools",
     "author": "Jorge 'Zepo' Diaz",
     "version": "0.1.0",
     "private": true,
@@ -12,7 +12,6 @@
         "axios": "^0.19.2",
         "bootstrap-vue": "^2.1.0",
         "core-js": "^3.6.4",
-        "twitter-lite": "^0.9.4",
         "vue": "^2.6.11"
     },
     "devDependencies": {
