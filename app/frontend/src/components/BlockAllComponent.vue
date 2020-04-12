@@ -23,8 +23,8 @@ export default {
     data() {
         return {
             showProgressBar: false,
-            max: 20,
-            value: 1,
+            max: null,
+            value: null,
         };
     },
     props: {
@@ -36,9 +36,10 @@ export default {
     methods: {
         async block() {
             this.showProgressBar = true;
+            this.max = this.profiles.length;
             // https://stackoverflow.com/a/34349073
             for (const [index, profile] of this.profiles.entries()) {
-                this.value = index + 1;
+                this.value = index;
                 axios
                     .post(`http://localhost:5000/api/1.0/profiles/block/${profile.id}`)
                     .then((res) => {
@@ -47,7 +48,7 @@ export default {
                     .catch((error) => {
                         console.error(error);
                     });
-                await delay(Math.floor(5000 + Math.random() * (8000 + 1 - 5000)));
+                await delay(Math.floor(1500 + Math.random() * (1500 + 1 - 5000)));
             }
             this.showProgressBar = false;
         },

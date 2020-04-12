@@ -14,9 +14,13 @@
                     <img alt class="card-img-profile" :src="profile.profile_image_url_https" />
                     <h4 class="card-title">{{ profile.name }}</h4>
                     <small>{{ profile.description }}</small>
+                    <hr>
+                    <h6>Why is here:</h6>
+                    <small v-if="profile.tweet">{{ profile.tweet }}</small>
                     <div class="card-body">
                         <block-button :profileId="profile.id"></block-button>
                     </div>
+
                 </div>
             </b-card>
         </b-card-group>

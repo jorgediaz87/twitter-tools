@@ -26,7 +26,6 @@ def get_profiles(query='Test', per_page=20, page=1):
 # http://docs.tweepy.org/en/latest/api.html#API.create_block
 @app.route('/api/1.0/profiles/block/<int:user_id>', methods=['POST'])
 def block_user(user_id='Test'):
-    return jsonify(user_id)
     try:
         response = API.create_block(user_id)
         return jsonify(response)
@@ -37,7 +36,7 @@ def block_user(user_id='Test'):
 @app.route('/api/1.0/search/<string:query>', methods=['GET'])
 def get_results(query='Test'):
     try:
-        results = API.search(query)
+        results = API.search(q=query, geocode='40.416775,-3.703790,1000km', lang='es')
         return jsonify(results)
     except tweepy.TweepError:
         print('Ouch! I have to capture this')
