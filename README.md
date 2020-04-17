@@ -21,7 +21,7 @@ There are some functions that are still unfinished and some that I have not been
 Clone the proyect from the repository:
 
 ```bash
-git clone https://zepo87@bitbucket.org/zepo87/twitter-tools.git
+git clone https://github.com/zepo87/twitter-tools.git
 ```
 
 Install python requirements:
