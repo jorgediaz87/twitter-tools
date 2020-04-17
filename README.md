@@ -1,5 +1,6 @@
 # Twitter Tools
 This is a personal project to learn how to use technologies like Vue or Flask.
+
 Twitter management tools to block bots and hoaxes accounts easily and perform batch actions.
 
 ## Update
